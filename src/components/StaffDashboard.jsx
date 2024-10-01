@@ -78,7 +78,7 @@ export default function StaffDashboard() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="flex flex-col items-center justify-center p-8 flex-1">
+      <div className="flex flex-col items-center justify-center p-4 flex-1">
         {/* Button to enable audio */}
         {!audioEnabled && (
           <button
@@ -88,12 +88,12 @@ export default function StaffDashboard() {
             Enable Audio Alerts
           </button>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-24 w-full max-w-4xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
           {cabinData.map(({ cabinName, occupant }, index) => (
             <button
               key={index}
               onClick={() => handleStopBlinking(cabinName)}
-              className={`p-6 w-56 h-32 text-white text-xl font-bold rounded-lg shadow-lg transition transform hover:scale-105 ${
+              className={`p-10 w-full h-40 text-white text-xl font-bold rounded-lg shadow-lg transition transform hover:scale-105 ${
                 blinkingCabins[cabinName]
                   ? "bg-red-500 blinking"
                   : "bg-green-500"
