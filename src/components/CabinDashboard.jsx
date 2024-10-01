@@ -25,7 +25,7 @@ const CabinDashboard = () => {
     try {
       // Send a POST request to the backend to notify staff of the assistance request
       const response = await fetch(
-        "https://notification-back.onrender.com/api/assist",
+        "https://office-assist-backend.onrender.com/api/assist",
         {
           method: "POST",
           headers: {
