@@ -25,27 +25,28 @@ export default function StaffDashboard() {
 
   useEffect(() => {
     // Connect to the Socket.IO server
-   const socketRef = useRef(null);
+    const socketRef = useRef(null);
 
-useEffect(() => {
-  // Connect to the Socket.IO server
-  socketRef.current = window.io("https://office-assist-backend.onrender.com/", {
-    transports: ["websocket"], // Force WebSocket connection
-    reconnectionAttempts: 5, // Retry a few times if connection fails
-    secure: true, // Use secure WebSocket
-  });
+    useEffect(() => {
+      // Connect to the Socket.IO server
+      socketRef.current = window.io(
+        "https://office-assist-backend.onrender.com/",
+        {
+          transports: ["websocket"], // Force WebSocket connection
+          reconnectionAttempts: 5, // Retry a few times if connection fails
+          secure: true, // Use secure WebSocket
+        }
+      );
 
-  // Handle connection error
-  socketRef.current.on("connect_error", (err) => {
-    console.error("Socket connection error:", err);
-  });
+      // Handle connection error
+      socketRef.current.on("connect_error", (err) => {
+        console.error("Socket connection error:", err);
+      });
 
-  return () => {
-    socketRef.current.disconnect();
-  };
-}, []);
-
-    );
+      return () => {
+        socketRef.current.disconnect();
+      };
+    }, []);
 
     // Listen for assistance requests
     socketRef.current.on("new-assistance-request", (data) => {
