@@ -9,9 +9,12 @@ const CabinDashboard = () => {
 
   useEffect(() => {
     // Use the global `io` object from the Socket.IO CDN
-    socketRef.current = window.io("https://notification-back.onrender.com", {
-      transports: ["websocket"],
-    });
+    socketRef.current = window.io(
+      "https://office-assist-backend.onrender.com/",
+      {
+        transports: ["websocket"],
+      }
+    );
 
     return () => {
       socketRef.current.disconnect();

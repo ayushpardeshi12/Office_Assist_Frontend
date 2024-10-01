@@ -25,9 +25,12 @@ export default function StaffDashboard() {
 
   useEffect(() => {
     // Connect to the Socket.IO server
-    socketRef.current = window.io("https://notification-back.onrender.com", {
-      transports: ["websocket"],
-    });
+    socketRef.current = window.io(
+      "https://office-assist-backend.onrender.com/",
+      {
+        transports: ["websocket"],
+      }
+    );
 
     // Listen for assistance requests
     socketRef.current.on("new-assistance-request", (data) => {
