@@ -35,8 +35,14 @@ export default function StaffDashboard() {
     // Listen for assistance requests
     socketRef.current.on("new-assistance-request", (data) => {
       setBlinkingCabins((prev) => ({ ...prev, [data.cabinName]: true }));
+
+      // Play the sound immediately once the request is received
       if (audioEnabled && audioRef.current) {
-        // Play the notification sound at intervals if audio is enabled
+        audioRef.current.play().catch((error) => {
+          console.error("Error playing audio:", error);
+        });
+
+        // After the first play, start the interval for 5-second repeating sound
         if (audioInterval) clearInterval(audioInterval);
         const intervalId = setInterval(() => {
           audioRef.current.play().catch((error) => {

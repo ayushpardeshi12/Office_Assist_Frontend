@@ -8,13 +8,16 @@ const CabinDashboard = () => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    // Use the global `io` object from the Socket.IO CDN
+    // Connect to the Socket.IO server
     socketRef.current = window.io(
-      "https://office-assist-backend.onrender.com/",
+      "https://office-assist-backend.onrender.com",
       {
         transports: ["websocket"],
       }
     );
+
+    // Automatically send the assistance request when the URL is accessed
+    handleAssistanceRequest();
 
     return () => {
       socketRef.current.disconnect();
@@ -36,9 +39,7 @@ const CabinDashboard = () => {
       );
 
       if (response.ok) {
-        alert("Assistance request sent!");
-        // Emit the assistance request via Socket.IO
-        socketRef.current.emit("new-assistance-request", { cabinName });
+        alert("Assistance request sent automatically!");
       } else {
         alert("Error sending request.");
       }
@@ -56,7 +57,7 @@ const CabinDashboard = () => {
       <div className="flex-1 flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold mb-8">{cabinName} Cabin</h1>
         <button
-          onClick={handleAssistanceRequest}
+          onClick={handleAssistanceRequest} // Optional: In case someone clicks manually
           className="bg-red-600 text-white p-4 w-3/5 h-28 rounded-lg shadow-md hover:bg-red-700 transition-all"
         >
           Request Assistance
