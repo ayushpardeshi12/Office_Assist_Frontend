@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -6,6 +6,7 @@ import Footer from "./Footer";
 const CabinDashboard = () => {
   const { cabinName } = useParams(); // Get the cabin name from the URL
   const socketRef = useRef(null);
+  const [audio] = useState(new Audio("path/to/your/alert-sound.mp3")); // Add your audio file path here
 
   useEffect(() => {
     // Connect to the Socket.IO server
@@ -40,6 +41,7 @@ const CabinDashboard = () => {
 
       if (response.ok) {
         alert("Assistance request sent automatically!");
+        audio.play(); // Play audio alert
       } else {
         alert("Error sending request.");
       }

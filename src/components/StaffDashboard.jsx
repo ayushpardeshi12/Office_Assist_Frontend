@@ -89,17 +89,17 @@ export default function StaffDashboard() {
         {!audioEnabled && (
           <button
             onClick={enableAudio}
-            className="mb-6 p-2 bg-blue-600 text-white rounded-lg shadow-md"
+            className=" mt-14 py-3 w-full max-w-xs bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all"
           >
             Enable Audio Alerts
           </button>
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4 my-14">
           {cabinData.map(({ cabinName, occupant }, index) => (
             <button
               key={index}
               onClick={() => handleStopBlinking(cabinName)}
-              className={`p-10 w-full h-40 text-white text-xl font-bold rounded-lg shadow-lg transition transform hover:scale-105 ${
+              className={`p-4 sm:p-6 md:p-8 w-full h-32 sm:h-40 text-white text-lg sm:text-xl font-bold rounded-lg shadow-lg transition transform hover:scale-105 ${
                 blinkingCabins[cabinName]
                   ? "bg-red-500 blinking"
                   : "bg-green-500"
